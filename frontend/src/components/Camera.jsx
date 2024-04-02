@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Camera.css'
+import './css/Camera.css'
 const CameraAccessReact = () => {
     const [isMicOn, setIsMicOn] = useState(true);
     const [stream, setStream] = useState(null);

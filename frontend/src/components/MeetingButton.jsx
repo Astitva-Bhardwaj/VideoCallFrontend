@@ -7,18 +7,42 @@ const MeetingButton = () => {
     const [cameraAccess, setCameraAccess] = useState('');
 
     const handleJoinNow = async (e) => {
+        // e.preventDefault();
+        // try {
+        //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        //     setCameraAccess('true');
+        //     console.log('Camera access granted:', stream);
+        //     navigate('/camera');
+            
+        //     // Submit the form programmatically here or use axios to send the data
+        //     await axios.post('http://localhost:8081/user/video/join', { cameraAccess });
+        // } catch (error) {
+        //     console.error('Error accessing camera or joining video call:', error);
+        //     setCameraAccess('false');
+        //     // Handle error gracefully, such as displaying an error message to the user
+        // }
+
         e.preventDefault();
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             setCameraAccess('true');
             console.log('Camera access granted:', stream);
-            navigate('/camera');
             
-            // Submit the form programmatically here or use axios to send the data
-            await axios.post('http://localhost:8081/user/video/join', { cameraAccess });
+            const response = await axios.post('http://localhost:8081/user/video/join?cameraAccess=true', { cameraAccess: 'true' });
+            console.log(response.data);
+            if (response.data === 'camera') {
+                // Camera access granted, navigate to the meeting page
+                // window.location.href = '/camera';
+                navigate('/camera');
+            } else {
+                console.log("adhufiagkfhda");
+                // Camera access not granted, handle redirection to error page or display error message
+                // setError('Camera access not granted');
+            }
         } catch (error) {
             console.error('Error accessing camera or joining video call:', error);
             setCameraAccess('false');
+            // setError('Error accessing camera or joining video call');
             // Handle error gracefully, such as displaying an error message to the user
         }
     };
@@ -48,10 +72,11 @@ const MeetingButton = () => {
     return (
         <div className="container">
             <h1>Meeting Page</h1>
-            <form onSubmit={handleJoinNow}>
+            <button onClick={handleJoinNow}>Join Video Call</button>
+            {/* <form onSubmit={handleJoinNow}>
                 <input type="hidden" id="cameraAccessInput" name="cameraAccess" value={cameraAccess} />
                 <button type="submit" id="joinNowBtn" name="joinNow" value="Join Now">Join Now</button>
-            </form>
+            </form> */}
 
             <form id="presentForm" onSubmit={handlePresent}>
                 {/* Update the value of the hidden input based on button click */}

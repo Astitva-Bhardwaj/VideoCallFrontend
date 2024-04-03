@@ -5,25 +5,29 @@ const MeetingFormrum = styled.div`
   weidth: 100vw;
   gap: 10rm;
   align-items: center;
-  
+
   .container {
     display: flex;
     gap: 12rem;
-    height: 600px;
-    justify-content: center; 
+    height: 500px;
+    justify-content: center;
   }
-  .lable{
+  .lable {
     font-size: 1rem;
   }
-  .form-group{
-      color: wheat;
-      gap: 20px;
-      
+  .form-group {
+    color: wheat;
+    gap: 20px;
+    h2 {
+      margin-left: 3rem;
+      justify-content: center;
+      margin-top: 1rem;
     }
-  .create{
-    h1{
-        color: white;
-        align-content: center;
+  }
+  .create {
+    h1 {
+      color: white;
+      align-content: center;
     }
     display: flex;
     flex-direction: column;
@@ -31,13 +35,15 @@ const MeetingFormrum = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 3rem 5rem;
-    margin-top: 20px; 
+    margin-top: 65px;
+
     input {
       background-color: transparent;
       padding: 1rem;
       border: 0.1rem solid #4e0eff;
       border-radius: 0.4rem;
       color: white;
+      margin-top: 4rem;
       width: 100%;
       font-size: 1rem;
       &:focus {
@@ -56,32 +62,35 @@ const MeetingFormrum = styled.div`
       font-size: 1rem;
       text-transform: uppercase;
       transition: 0.5s ease-in-out;
+      margin-top: 6rem;
+      margin-left: 4rem;
+      justify-content: center;
       &:hover {
         background-color: #4e0eff;
       }
     }
+  }
 
-  } 
-  
-  .join{
-    h1{
-        color: white;
-        align-content: center;
+  .join {
+    h1 {
+      color: white;
+      align-content: center;
     }
-    
     display: flex;
     flex-direction: column;
     gap: 2rem;
     background-color: #00000076;
     border-radius: 2rem;
-    padding: 3rem 5rem;
-    margin-top: 20px;
+    padding: 3rem 7rem;
+    margin-top: 65px;
+
     input {
       background-color: transparent;
       padding: 1rem;
       border: 0.1rem solid #4e0eff;
       border-radius: 0.4rem;
       color: white;
+      margin-top: 4rem;
       width: 100%;
       font-size: 1rem;
       &:focus {
@@ -100,6 +109,9 @@ const MeetingFormrum = styled.div`
       font-size: 1rem;
       text-transform: uppercase;
       transition: 0.5s ease-in-out;
+      margin-top: 6rem;
+      margin-left: 4rem;
+      justify-content: center;
       &:hover {
         background-color: #4e0eff;
       }

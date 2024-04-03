@@ -7,21 +7,6 @@ const MeetingButton = () => {
     const [cameraAccess, setCameraAccess] = useState('');
 
     const handleJoinNow = async (e) => {
-        // e.preventDefault();
-        // try {
-        //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        //     setCameraAccess('true');
-        //     console.log('Camera access granted:', stream);
-        //     navigate('/camera');
-            
-        //     // Submit the form programmatically here or use axios to send the data
-        //     await axios.post('http://localhost:8081/user/video/join', { cameraAccess });
-        // } catch (error) {
-        //     console.error('Error accessing camera or joining video call:', error);
-        //     setCameraAccess('false');
-        //     // Handle error gracefully, such as displaying an error message to the user
-        // }
-
         e.preventDefault();
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -31,19 +16,13 @@ const MeetingButton = () => {
             const response = await axios.post('http://localhost:8081/user/video/join?cameraAccess=true', { cameraAccess: 'true' });
             console.log(response.data);
             if (response.data === 'camera') {
-                // Camera access granted, navigate to the meeting page
-                // window.location.href = '/camera';
                 navigate('/camera');
             } else {
-                console.log("adhufiagkfhda");
-                // Camera access not granted, handle redirection to error page or display error message
-                // setError('Camera access not granted');
+                navigate('/camera');
             }
         } catch (error) {
             console.error('Error accessing camera or joining video call:', error);
             setCameraAccess('false');
-            // setError('Error accessing camera or joining video call');
-            // Handle error gracefully, such as displaying an error message to the user
         }
     };
 

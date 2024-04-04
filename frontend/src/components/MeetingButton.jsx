@@ -12,14 +12,9 @@ const MeetingButton = () => {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             setCameraAccess('true');
             console.log('Camera access granted:', stream);
-            
+            navigate('/camera');
             const response = await axios.post('http://localhost:8081/user/video/join?cameraAccess=true', { cameraAccess: 'true' });
             console.log(response.data);
-            if (response.data === 'camera') {
-                navigate('/camera');
-            } else {
-                navigate('/camera');
-            }
         } catch (error) {
             console.error('Error accessing camera or joining video call:', error);
             setCameraAccess('false');

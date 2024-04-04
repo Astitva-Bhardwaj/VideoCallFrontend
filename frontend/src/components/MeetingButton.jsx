@@ -57,6 +57,7 @@ const MeetingButton = () => {
     }
   };
 
+
   const toggleMic = () => {
     const tracks = document
       .getElementById("cameraView")
@@ -67,6 +68,22 @@ const MeetingButton = () => {
       });
     setIsMicOn((prevState) => !prevState);
   };
+
+    const handleJoinNow = async (e) => {
+        e.preventDefault();
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            setCameraAccess('true');
+            console.log('Camera access granted:', stream);
+            navigate('/camera');
+            const response = await axios.post('http://localhost:8081/user/video/join?cameraAccess=true', { cameraAccess: 'true' });
+            console.log(response.data);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error accessing camera or joining video call:', error);
+            setCameraAccess('false');
+        }
+    };
 
   const handleJoinNow = async (e) => {
     e.preventDefault();
@@ -130,6 +147,31 @@ const MeetingButton = () => {
               <button className="mute" onClick={toggleMic}>
                 {isMicOn ? "Mute Mic" : "Unmute Mic"}
               </button>
+
+        try {
+            // Update the value of the hidden input dynamically to "true"
+            const screenPresentInput = document.getElementById('screenPresentInput');
+            if (screenPresentInput) {
+                screenPresentInput.value = 'true'; // Set the value to "true"
+                console.log('screenPresent value:', screenPresentInput.value); 
+            }
+            navigate('/screen_sharing');
+            window.location.reload();
+            // Submit the form programmatically here or use axios to send the data
+            await axios.post('http://localhost:8081/user/video/present', { screenPresent: 'true' });
+            console.log('Screen presentation request sent successfully');
+        
+        } catch (error) {
+            console.error('Error sending screen presentation request:', error);
+            // Handle error gracefully, such as displaying an error message to the user
+        }
+    };
+    return (
+        <div className="container">
+            <h1>Meeting Page</h1>
+            <div id="cameraContainer">
+                <video id="cameraView" width="300" height="200" autoPlay muted></video>
+
             </div>
             <div className="form-div">
               <form

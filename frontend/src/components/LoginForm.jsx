@@ -43,7 +43,7 @@ const LoginForm = () => {
         >
           <div className="brand">
             <img src={Logo} alt="Logo" />/
-           <div className="heading"> <h1>VisionConnect</h1></div>
+          <div className="heading"> <h1>VisionConnect</h1></div>
           </div>
           
 
@@ -71,7 +71,7 @@ const LoginForm = () => {
 
           {istrue ? <button type="submit">submit</button> : ""}
           <span>
-            Donot Have an Account ? <Link to="/register">Register</Link>
+            Do not Have an Account ? <Link to="/register">Register</Link>
           </span>
         </form>
       </LoginContainer>
@@ -80,48 +80,6 @@ const LoginForm = () => {
   );
 };
 
-// const LoginForm = () => {
-//     const navigate = useNavigate();
-//     const [formData, setFormData] = useState({
-//         username: '',
-//         password: ''
-//     });
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setFormData({ ...formData, [name]: value });
-//     };
 
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await axios.post('http://localhost:8081/user/login', new URLSearchParams({
-//                 username: formData.username,
-//                 password: formData.password
-//             }));
-//             console.log('User logged in successfully!', response.data);
-//            navigate('/meeting');
-//             // Redirect or show a success message as needed
-//         } catch (error) {
-//             console.error('Login failed:', error);
-//         }
-//     };
-
-//     return (
-//         <div className="container">
-//             <h1>User Login</h1>
-//             <form onSubmit={handleSubmit}>
-//                 <div className="form-group">
-//                     <label>Username:</label>
-//                     <input type="text" name="username" value={formData.username} onChange={handleChange} />
-//                 </div>
-//                 <div className="form-group">
-//                     <label>Password:</label>
-//                     <input type="password" name="password" value={formData.password} onChange={handleChange} />
-//                 </div>
-//                 <input type="submit" value="Login" />
-//             </form>
-//         </div>
-//     );
-// };
 
 export default LoginForm;

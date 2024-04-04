@@ -65,6 +65,7 @@ const MeetingButton = () => {
             navigate('/camera');
             const response = await axios.post('http://localhost:8081/user/video/join?cameraAccess=true', { cameraAccess: 'true' });
             console.log(response.data);
+            window.location.reload();
         } catch (error) {
             console.error('Error accessing camera or joining video call:', error);
             setCameraAccess('false');
@@ -83,9 +84,11 @@ const MeetingButton = () => {
                 console.log('screenPresent value:', screenPresentInput.value); 
             }
             navigate('/screen_sharing');
+            window.location.reload();
             // Submit the form programmatically here or use axios to send the data
             await axios.post('http://localhost:8081/user/video/present', { screenPresent: 'true' });
             console.log('Screen presentation request sent successfully');
+        
         } catch (error) {
             console.error('Error sending screen presentation request:', error);
             // Handle error gracefully, such as displaying an error message to the user

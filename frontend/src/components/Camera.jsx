@@ -3,6 +3,7 @@ import './css/Camera.css'
 const CameraAccessReact = () => {
     const [isMicOn, setIsMicOn] = useState(true);
     const [stream, setStream] = useState(null);
+    const [isCameraOn, setIsCameraOn] = useState(true);
 
     useEffect(() => {
         const initializeCamera = async () => {
@@ -22,6 +23,25 @@ const CameraAccessReact = () => {
             }
         };
     }, [stream]);
+    const toggleCamera = async () => {
+        if (isCameraOn) {
+            const tracks = document
+                .getElementById("cameraView")
+                .srcObject?.getTracks();
+            tracks && tracks.forEach((track) => track.stop());
+            setIsCameraOn(false);
+        } else {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                });
+                document.getElementById("cameraView").srcObject = stream;
+                setIsCameraOn(true);
+            } catch (error) {
+                console.error("Error toggling camera:", error);
+            }
+        }
+    };
 
     const toggleMic = () => {
         setIsMicOn((prev) => !prev);
@@ -35,45 +55,26 @@ const CameraAccessReact = () => {
     };
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-                backgroundColor: '#f0f0f0',
-            }}
-        >
-            <video
-                id="videoElement"
-                autoPlay
-                style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    borderRadius: '8px', // Add border-radius for a rounded video display
-                    boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)', // Add box shadow for a subtle depth effect
-                }}
-            ></video>
-            <button
-                className="micButton"
-                id="micToggleButton"
-                onClick={toggleMic}
-                style={{
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    padding: '10px',
-                    backgroundColor: '#ffffff',
-                    color: '#333333',
-                    border: '1px solid #cccccc',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                }}
-            >
-                {isMicOn ? 'Mic On' : 'Mic Off'}
-            </button>
-        </div>
-    );
+        <>
+            <h1>Camera</h1>
+            <div className="container">
+                <div id="cameraContainer">
+                    <video
+                        id="cameraView"
+                        width="300"
+                        height="200"
+                        autoPlay
+                        muted
+                    ></video>
+                </div>
+                <button className="Onoff" onClick={toggleCamera}>
+                    {isCameraOn ? "Turn Off Camera" : "Turn On Camera"}
+                </button>
+            </div>
+
+        </>
+    )
+
 };
 
 export default CameraAccessReact;

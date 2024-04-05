@@ -76,6 +76,7 @@ const MeetingForm = () => {
                 type="text"
                 id="joinCallId"
                 name="joinCallId"
+                placeholder="Enter ID"
                 value={joinCallId}
                 onChange={handleJoinCallChange}
                 required
